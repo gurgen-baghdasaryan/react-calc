@@ -7,10 +7,24 @@ import Section from "./components/Section";
 
 
 
+const compoundInterest = (deposit, contribution, years, rate) => {
+  let total = deposit
+  for (let i = 0; i < years; i++) {
+    total = (total + contribution) * (rate + 1)
+
+  }
+  return Math.round(total)
+}
+
 
 
 function App() {
-  const handleSubmit = () => {}
+
+
+  const handleSubmit = ({ deposit, contribution, years, rate }) => {
+    const val = compoundInterest(Number(deposit), Number(contribution), Number(years), Number(rate))
+    console.log(val);
+  }
 
   return (
 
@@ -18,17 +32,17 @@ function App() {
       <Section>
         <Formik initialValues={{
 
-          deposit:'',
-          contribution:'',
-          years:'',
-          rate:'',      
-          }}
+          deposit: '',
+          contribution: '',
+          years: '',
+          rate: '',
+        }}
           onSubmit={handleSubmit}>
           <Form>
-            <Input name="deposit" label="Deposito inicial"/>
-            <Input name="contribution" label="Contributión anual"/>
-            <Input name="years" label="Años"/>
-            <Input name="rate" label="Interés estimado"/>
+            <Input name="deposit" label="Deposito inicial" />
+            <Input name="contribution" label="Contributión anual" />
+            <Input name="years" label="Años" />
+            <Input name="rate" label="Interés estimado" />
             <Button>Calcular</Button>
           </Form>
         </Formik>
